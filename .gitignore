@@ -4,3 +4,5 @@ packages/desktop/dist/win-unpacked/
 packages/desktop/dist/*.blockmap
 *.log
 .DS_Store
+
+packages/desktop/dist/*.exe
