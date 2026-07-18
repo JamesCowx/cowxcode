@@ -17,6 +17,14 @@ It is **not** affiliated with, endorsed by, or built by the OpenCode team.
 | `packages/desktop` | Windows desktop app built with Electron + custom black/grey/red UI |
 | `packages/web` | Marketing & documentation website (static, deploy anywhere) |
 
+## Download
+
+Prebuilt Windows installers are attached to the
+[GitHub release](https://github.com/JamesCowx/cowxcode/releases/tag/v2.0.0):
+
+- **[CowxCode-Setup-1.0.0.exe](https://github.com/JamesCowx/cowxcode/releases/download/v2.0.0/CowxCode-Setup-1.0.0.exe)** — NSIS installer
+- **[CowxCode-Portable-1.0.0.exe](https://github.com/JamesCowx/cowxcode/releases/download/v2.0.0/CowxCode-Portable-1.0.0.exe)** — portable build
+
 ## Quick start
 
 ```bash
@@ -28,3 +36,6 @@ npm run start:desktop
 ## License
 
 MIT
+
+🍁 Proudly Canadian — Developed by James Cowx
+
