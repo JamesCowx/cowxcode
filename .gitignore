@@ -1,0 +1,6 @@
+node_modules/
+dist/asar-extract/
+packages/desktop/dist/win-unpacked/
+packages/desktop/dist/*.blockmap
+*.log
+.DS_Store

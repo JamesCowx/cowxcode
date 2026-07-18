@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CowxCode — The open source coding agent</title>
+    <meta
+      name="description"
+      content="CowxCode is an open source, provider-agnostic AI coding agent for Windows. Developed by James Cowx."
+    />
+    <meta name="keywords" content="AI coding agent, open source, Windows, Electron, provider-agnostic, CowxCode" />
+    <meta property="og:title" content="CowxCode — The open source coding agent" />
+    <meta property="og:description" content="An open source, provider-agnostic AI coding agent for Windows." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.cowxcode.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CowxCode — The open source coding agent" />
+    <meta name="twitter:description" content="An open source AI coding agent for Windows." />
+    <link rel="icon" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="scroll-progress"></div>
+    <div id="cursor-glow"></div>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div id="intro">
+      <img class="ilogo" src="favicon.svg" alt="CowxCode" />
+      <div class="ibar"><i></i></div>
+      <div class="itext">Loading CowxCode</div>
+    </div>
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="index.html">
+          <span class="logo"><img src="logo.svg" alt="CowxCode" /></span> CowxCode
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="docs.html">Docs</a>
+          <a href="download.html">Download</a>
+        </div>
+        <a class="nav-cta" href="download.html">Get CowxCode</a>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="nav-mobile" id="nav-mobile">
+        <a href="index.html">Home</a>
+        <a href="docs.html">Docs</a>
+        <a href="download.html">Download</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <canvas id="hero-canvas"></canvas>
+      <div class="container">
+        <span class="pill">Open source · <b>Provider-agnostic</b> · Windows</span>
+        <h1>The coding agent<br />with a <span class="glitch accent" data-text="red">red</span> soul.</h1>
+        <p>
+          CowxCode is an open source AI coding agent that runs locally on your
+          Windows machine and talks to any LLM provider. Build, refactor and
+          understand code with a polished desktop interface.
+        </p>
+        <div class="chip" style="top: 22%; left: 8%">⚙ <b>read_file</b></div>
+        <div class="chip" style="top: 30%; right: 6%; animation-delay: 1.5s">▶ <b>run_command</b></div>
+        <div class="chip" style="top: 14%; right: 9%; animation-delay: 2.8s">🔍 <b>search_files</b></div>
+        <div class="hero-cta">
+          <a class="btn primary" href="download.html">Download for Windows</a>
+          <a class="btn ghost" href="docs.html">Read the docs</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="num" data-count="5">0</div><div class="lbl">Built-in tools</div></div>
+          <div class="stat"><div class="num" data-count="4">0</div><div class="lbl">Providers</div></div>
+          <div class="stat"><div class="num" data-count="100" data-suffix="%">0</div><div class="lbl">Local &amp; open</div></div>
+          <div class="stat"><div class="num" data-count="0" data-suffix="ms">0</div><div class="lbl">Vendor lock-in</div></div>
+        </div>
+
+        <div class="window-mock">
+          <div class="wm-bar">
+            <span class="dot r"></span><span class="dot y"></span
+            ><span class="dot g"></span>
+            <span class="title">cowxcode — project</span>
+          </div>
+          <div class="wm-body">
+            <div class="wm-side">
+              <div class="item active">◇ Chat</div>
+              <div class="item">⚙ Tools</div>
+              <div class="item">⚒ Settings</div>
+            </div>
+            <div class="wm-main" id="term">
+              <div class="term-line" data-delay="200"><span class="u">You</span> › explain this repo</div>
+              <div class="term-line" data-delay="900"><span class="r">CowxCode</span> › reading project structure<span class="term-cursor"></span></div>
+              <div class="term-line tool" data-delay="1600">
+                ⚙ read_file → src/agent.js<br />⚙ search_files → "export"
+              </div>
+              <div class="term-line" data-delay="2500"><span class="r">CowxCode</span> › This is a provider-agnostic
+                agent: it loops a model with tool calls to act on your files<span class="term-cursor"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="marquee">
+      <div class="marquee-track">
+        <span><b>◆</b> OpenAI</span><span><b>◆</b> Anthropic</span
+        ><span><b>◆</b> Ollama</span><span><b>◆</b> LM Studio</span
+        ><span><b>◆</b> Local-first</span><span><b>◆</b> MIT Licensed</span
+        ><span><b>◆</b> Electron</span><span><b>◆</b> Provider-agnostic</span>
+        <span><b>◆</b> OpenAI</span><span><b>◆</b> Anthropic</span
+        ><span><b>◆</b> Ollama</span><span><b>◆</b> LM Studio</span
+        ><span><b>◆</b> Local-first</span><span><b>◆</b> MIT Licensed</span
+        ><span><b>◆</b> Electron</span><span><b>◆</b> Provider-agnostic</span>
+      </div>
+    </div>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Everything a coding agent should be</h2>
+        <p class="sub">
+          Powerful where it counts, quiet everywhere else. CowxCode stays out of
+          your way and gets the work done.
+        </p>
+        <div class="grid">
+          <div class="card reveal tilt">
+            <div class="ic">◆</div>
+            <h3>Provider-agnostic</h3>
+            <p>
+              Wire up OpenAI, Anthropic, Google, Mistral, Groq, xAI, Perplexity,
+              OpenRouter, DeepSeek, Ollama, LM Studio or any OpenAI-compatible
+              endpoint. Your keys, your choice.
+            </p>
+          </div>
+          <div class="card reveal tilt">
+            <div class="ic">⚙</div>
+            <h3>Real tools</h3>
+            <p>
+              Read, write, list, search and run commands against your project
+              folder. The model acts, not just talks.
+            </p>
+          </div>
+          <div class="card reveal tilt">
+            <div class="ic">▣</div>
+            <h3>Native Windows app</h3>
+            <p>
+              A polished Electron desktop app with a custom title bar and native Windows theme. No terminal required.
+            </p>
+          </div>
+          <div class="card reveal tilt">
+            <div class="ic">▤</div>
+            <h3>Local &amp; private</h3>
+            <p>
+              Your config is stored only in your user data folder. Nothing is
+              sent anywhere but your chosen provider.
+            </p>
+          </div>
+          <div class="card reveal tilt">
+            <div class="ic">◈</div>
+            <h3>Open source</h3>
+            <p>
+              MIT licensed. Read it, fork it, ship it. Built by the community,
+              for the community.
+            </p>
+          </div>
+          <div class="card reveal tilt">
+            <div class="ic">✦</div>
+            <h3>Extensible</h3>
+            <p>
+              A tiny, dependency-free core engine you can embed, script or extend
+              with your own tools.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>From prompt to code</h2>
+        <p class="sub">
+          CowxCode drives a tight loop: you ask, it reasons, it calls a tool, it
+          reports back — until the job is done.
+        </p>
+        <div class="grid">
+          <div class="card reveal tilt">
+            <div class="ic">1</div>
+            <h3>Ask</h3>
+            <p>Type a plain-language request in the chat. Pick your project folder.</p>
+          </div>
+          <div class="card reveal tilt">
+            <div class="ic">2</div>
+            <h3>Act</h3>
+            <p>
+              The agent streams a plan, calls tools and edits files with full
+              visibility of every step.
+            </p>
+          </div>
+          <div class="card reveal tilt">
+            <div class="ic">3</div>
+            <h3>Ship</h3>
+            <p>Review the changes in your editor. New session whenever you want.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>How it works under the hood</h2>
+        <p class="sub">A tight agent loop — from your words to real file changes.</p>
+        <div class="timeline">
+          <div class="tl-step reveal">
+            <h3>1. You ask a question</h3>
+            <p>Type anything — "explain this project", "write a login function", "find all bugs". The agent receives your message with a system prompt that defines its tools.</p>
+            <div class="tl-code">user → {"role":"user", "content":"explain this repo"}</div>
+          </div>
+          <div class="tl-step reveal">
+            <h3>2. The model streams a response</h3>
+            <p>Your configured provider (OpenAI, Anthropic, etc.) streams text back. When it needs to act, it emits a tool call as JSON inside a fenced block.</p>
+            <div class="tl-code">assistant → ```json { "tool": "read_file", "args": {…} } ```</div>
+          </div>
+          <div class="tl-step reveal">
+            <h3>3. CowxCode executes the tool</h3>
+            <p>The engine picks up the JSON tool call, runs it against your real project folder (reads/writes files, runs commands, searches), and feeds the result back to the model.</p>
+            <div class="tl-code">tool → runs on disk → result injected into messages</div>
+          </div>
+          <div class="tl-step reveal">
+            <h3>4. The loop repeats until done</h3>
+            <p>The model gets the tool result and can call more tools, or deliver a final answer. This continues up to 12 tool rounds per message — then it stops safely.</p>
+            <div class="tl-code">repeat → until model says "Done!" or max rounds hit</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+        <p class="sub">Everything you might wonder about CowxCode.</p>
+        <div class="faq">
+          <div class="faq-item">
+            <div class="faq-q">Is CowxCode really free?</div>
+            <div class="faq-a">Yes. CowxCode is MIT licensed and 100% free — forever. No subscriptions, no limits on file operations, and no tracking. You only pay for the AI provider you connect (OpenAI, Anthropic, etc.) if they require an API key.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">What providers does it support?</div>
+            <div class="faq-a">OpenAI (and any OpenAI-compatible endpoint), OpenCode Go / Zen, Anthropic Claude, Google Gemini, Mistral, Groq, xAI Grok, Perplexity, OpenRouter, DeepSeek, and local models via Ollama or LM Studio. Anything that speaks the OpenAI chat/completions stream format works.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Is my data safe?</div>
+            <div class="faq-a">Yes. Your API key is stored locally in your Windows user data folder and is only sent to the provider you configure. Files are accessed only from the project folder you select. Nothing is telemetry'd or uploaded to us.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Can I use it on macOS or Linux?</div>
+            <div class="faq-a">The core engine runs anywhere Node.js runs. The desktop app is Windows-only for now. You can run the core from source on any OS: clone the repo and use the agent programmatically.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">How is it different from opencode?</div>
+            <div class="faq-a">CowxCode is inspired by opencode but is an independent project with its own codebase, desktop UI, and brand identity. It aims to be a polished, Windows-first alternative with the same provider-agnostic philosophy.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container foot-inner">
+        <div class="foot-col" style="max-width: 280px">
+          <div class="brand" style="margin-bottom: 14px">
+            <span class="logo"><img src="logo.svg" alt="CowxCode" style="width:30px;height:30px" /></span> CowxCode
+          </div>
+          <p style="color: var(--grey-text); font-size: 13.5px">
+            The open source coding agent.
+          </p>
+          <div class="brand-sep"></div>
+          <p style="color: var(--grey-text-bright); font-size: 12.5px; margin-top: 10px; letter-spacing: 0.5px">
+            🍁 Proudly Canadian
+          </p>
+          <p style="color: var(--grey-text); font-size: 12.5px; margin-top: 4px">
+            Developed by <b style="color: var(--red-bright)">James Cowx</b>
+          </p>
+          <p style="font-size: 12.5px; margin-top: 4px">
+            <a href="https://www.JamesCowx.com" target="_blank" rel="noopener" style="color: var(--red-bright); text-decoration: none; font-weight: 500; letter-spacing: 0.3px">www.JamesCowx.com</a>
+          </p>
+        </div>
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="download.html">Download</a>
+          <a href="docs.html">Documentation</a>
+          <a href="index.html">Features</a>
+        </div>
+        <div class="foot-col">
+          <h4>Resources</h4>
+          <a href="docs.html#getting-started">Getting started</a>
+          <a href="docs.html#providers">Providers</a>
+          <a href="docs.html#tools">Tools</a>
+        </div>
+        <div class="foot-col">
+          <h4>Community</h4>
+          <a href="#">GitHub</a>
+          <a href="#">Discord</a>
+          <a href="#">X / Twitter</a>
+        </div>
+      </div>
+      <div class="container foot-bottom">
+        <span>© 2026 CowxCode Team · MIT License</span>
+        <span class="disclaimer">
+          CowxCode is an independent project. Not affiliated with or endorsed by
+          the OpenCode project or team.
+        </span>
+      </div>
+    </footer>
+
+    <button id="to-top" title="Back to top">↑</button>
+
+    <script>
+      // Intro loader
+      addEventListener("load", () => {
+        setTimeout(() => document.getElementById("intro")?.classList.add("done"), 1600);
+      });
+      // fallback if load already fired
+      setTimeout(() => document.getElementById("intro")?.classList.add("done"), 2600);
+
+      // Tilt + spotlight cards
+      document.querySelectorAll(".card.tilt").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const r = card.getBoundingClientRect();
+          const x = e.clientX - r.left, y = e.clientY - r.top;
+          const rx = (y / r.height - 0.5) * -10;
+          const ry = (x / r.width - 0.5) * 10;
+          card.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+          card.style.setProperty("--mx", x + "px");
+          card.style.setProperty("--my", y + "px");
+        });
+        card.addEventListener("mouseleave", () => (card.style.transform = ""));
+      });
+
+      // Back to top
+      const toTop = document.getElementById("to-top");
+      if (toTop) {
+        addEventListener("scroll", () => { toTop.classList.toggle("show", scrollY > 500); }, { passive: true });
+        toTop.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+      }
+
+      // Section scale-in
+      const secIO = new IntersectionObserver(
+        (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in-view"); secIO.unobserve(e.target); } }),
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".section").forEach((s) => secIO.observe(s));
+
+      // Nav glass on scroll
+      const nav = document.querySelector("nav");
+      addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 30), { passive: true });
+
+      // Mobile hamburger
+      const ham = document.getElementById("hamburger");
+      const mobNav = document.getElementById("nav-mobile");
+      if (ham && mobNav) {
+        ham.addEventListener("click", () => { ham.classList.toggle("open"); mobNav.classList.toggle("open"); });
+        mobNav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => { ham.classList.remove("open"); mobNav.classList.remove("open"); }));
+      }
+
+      // FAQ accordion
+      document.querySelectorAll(".faq-q").forEach((q) => {
+        q.addEventListener("click", () => q.parentElement.classList.toggle("open"));
+      });
+
+      // Reveal on scroll
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              e.target.style.setProperty("--d", (i % 3) * 0.08 + "s");
+              e.target.classList.add("visible");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll(".reveal, .dl-box, .section h2, .section .sub").forEach((el) => io.observe(el));
+
+      // Scroll progress bar
+      const bar = document.getElementById("scroll-progress");
+      if (bar) {
+        const onScroll = () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.width = (scrollY / h) * 100 + "%"; };
+        addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      }
+
+      // Cursor glow
+      const glow = document.getElementById("cursor-glow");
+      if (glow) {
+        addEventListener("mousemove", (e) => { glow.style.left = e.clientX + "px"; glow.style.top = e.clientY + "px"; });
+        addEventListener("mouseleave", () => (glow.style.opacity = "0"));
+        addEventListener("mouseenter", () => (glow.style.opacity = "1"));
+      }
+
+      // Magnetic buttons
+      document.querySelectorAll(".btn, .nav-cta").forEach((b) => {
+        b.addEventListener("mousemove", (e) => {
+          const r = b.getBoundingClientRect();
+          const x = e.clientX - r.left - r.width / 2;
+          const y = e.clientY - r.top - r.height / 2;
+          b.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
+        });
+        b.addEventListener("mouseleave", () => (b.style.transform = ""));
+      });
+
+      // Live terminal typing
+      const term = document.getElementById("term");
+      if (term) {
+        term.querySelectorAll(".term-line").forEach((line) => {
+          const d = parseInt(line.dataset.delay || "0", 10);
+          setTimeout(() => line.classList.add("show"), d);
+        });
+      }
+
+      // Stat counters
+      const statIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const el = e.target;
+            const target = parseInt(el.dataset.count, 10);
+            const suffix = el.dataset.suffix || "";
+            let cur = 0;
+            const step = Math.max(1, Math.ceil(target / 30));
+            const tick = () => {
+              cur = Math.min(target, cur + step);
+              el.textContent = cur + suffix;
+              if (cur < target) requestAnimationFrame(tick);
+            };
+            tick();
+            statIO.unobserve(el);
+          });
+        },
+        { threshold: 0.5 }
+      );
+      document.querySelectorAll(".stat .num").forEach((el) => statIO.observe(el));
+
+      // Hero particle field
+      const canvas = document.getElementById("hero-canvas");
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        let w, h, parts;
+        const resize = () => {
+          w = canvas.width = canvas.offsetWidth;
+          h = canvas.height = canvas.offsetHeight;
+          parts = Array.from({ length: 60 }, () => ({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            r: Math.random() * 1.8 + 0.6,
+          }));
+        };
+        resize();
+        addEventListener("resize", resize);
+        const draw = () => {
+          ctx.clearRect(0, 0, w, h);
+          for (let i = 0; i < parts.length; i++) {
+            const p = parts[i];
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(225,6,0,0.55)";
+            ctx.fill();
+            for (let j = i + 1; j < parts.length; j++) {
+              const q = parts[j];
+              const dx = p.x - q.x, dy = p.y - q.y;
+              const dist = Math.hypot(dx, dy);
+              if (dist < 120) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+                ctx.strokeStyle = `rgba(225,6,0,${0.18 * (1 - dist / 120)})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+              }
+            }
+          }
+          requestAnimationFrame(draw);
+        };
+        draw();
+      }
+    </script>
+  </body>
+</html>

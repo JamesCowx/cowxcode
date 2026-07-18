@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docs — CowxCode</title>
+    <meta name="description" content="CowxCode documentation: setup, providers, tools and configuration." />
+    <link rel="icon" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="index.html"><span class="logo"><img src="logo.svg" alt="CowxCode" /></span> CowxCode</a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="docs.html">Docs</a>
+          <a href="download.html">Download</a>
+        </div>
+        <a class="nav-cta" href="download.html">Get CowxCode</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="docs">
+        <aside class="docs-nav">
+          <div class="group">Introduction</div>
+          <a href="#getting-started">Getting started</a>
+          <a href="#how-it-works">How it works</a>
+          <div class="group">Configuration</div>
+          <a href="#providers">Providers</a>
+          <a href="#config-file">Config file</a>
+          <div class="group">Capabilities</div>
+          <a href="#tools">Tools</a>
+          <a href="#sessions">Sessions</a>
+          <div class="group">Development</div>
+          <a href="#architecture">Architecture</a>
+          <a href="#contributing">Contributing</a>
+        </aside>
+
+        <main class="docs-content reveal">
+          <h1>CowxCode Docs</h1>
+          <p class="lead">
+            Everything you need to run, configure and extend the CowxCode coding
+            agent.
+          </p>
+
+          <h2 id="getting-started">Getting started</h2>
+          <p>
+            CowxCode ships as a Windows desktop app, but the engine is plain
+            JavaScript you can run anywhere Node runs.
+          </p>
+          <pre><code>git clone https://github.com/your-org/cowxcode
+cd cowxcode
+npm install
+npm run build
+npm run start:desktop</code></pre>
+          <p>
+            On first launch, open <b>Settings</b> from the sidebar, choose a
+            provider, paste your API key, and pick a project folder. Then start
+            chatting.
+          </p>
+
+          <h2 id="how-it-works">How it works</h2>
+          <p>
+            CowxCode drives a tight agent loop: your message is sent to a
+            provider, the model streams a response, and when it emits a tool call
+            (as JSON in a fenced block) the engine executes it against your
+            project and feeds the result back to the model. This repeats until the
+            task is complete.
+          </p>
+          <pre><code>user → provider → assistant text
+                 → tool call (```json)
+tool runs on disk → result → provider → … → done</code></pre>
+
+          <h2 id="providers">Providers</h2>
+          <p>
+            CowxCode is provider-agnostic. Configure one in Settings (stored
+            locally in your user data folder as <code>cowxcode.json</code>).
+          </p>
+          <ul>
+            <li><b>OpenAI (compatible)</b> — any OpenAI-style endpoint.</li>
+            <li><b>OpenCode Go</b> — $10/month subscription at <code>opencode.ai/zen/go/v1</code>.</li>
+            <li><b>OpenCode Zen</b> — pay-as-you-go at <code>opencode.ai/zen/v1</code>.</li>
+            <li><b>Anthropic</b> — Claude models via the Messages API.</li>
+            <li><b>Google Gemini</b> — Google's Gemini models.</li>
+            <li><b>Mistral</b> — Mistral Large, Small, Codestral and more.</li>
+            <li><b>Groq</b> — fast open-weight models (Llama, Mixtral, Gemma).</li>
+            <li><b>xAI Grok</b> — Grok 2/3 models.</li>
+            <li><b>Perplexity</b> — Sonar online-search models.</li>
+            <li><b>OpenRouter</b> — unified gateway to 100+ models.</li>
+            <li><b>DeepSeek</b> — direct DeepSeek API.</li>
+            <li><b>Ollama</b> — local models at <code>http://localhost:11434/v1</code>.</li>
+            <li><b>LM Studio</b> — local models at <code>http://localhost:1234/v1</code>.</li>
+          </ul>
+
+          <h2 id="config-file">Config file</h2>
+          <p>The on-disk config shape is simple:</p>
+          <pre><code>{
+  "provider": {
+    "provider": "openai",
+    "baseUrl": "https://api.openai.com/v1",
+    "apiKey": "sk-…",
+    "model": "gpt-4o"
+  }
+}</code></pre>
+          <p>
+            Swap <code>provider</code> for <code>anthropic</code>, <code>ollama</code>
+            or <code>lmstudio</code> as needed. Keys never leave your machine except
+            to reach the provider you configured.
+          </p>
+
+          <h2 id="tools">Tools</h2>
+          <p>
+            The agent can act on your project through these built-in tools. Each is
+            exposed in the <b>Tools</b> tab of the desktop app.
+          </p>
+          <ul>
+            <li><code>read_file</code> — read a text file.</li>
+            <li><code>write_file</code> — create or overwrite a file.</li>
+            <li><code>list_dir</code> — list a directory.</li>
+            <li><code>run_command</code> — execute a shell command.</li>
+            <li><code>search_files</code> — regex search across files.</li>
+          </ul>
+
+          <h2 id="sessions">Sessions</h2>
+          <p>
+            Each chat is a session with full message history. Use
+            <b>New Session</b> in the header to reset context. The engine keeps a
+            system prompt plus your conversation turns.
+          </p>
+
+          <h2 id="architecture">Architecture</h2>
+          <p>The monorepo is split into focused packages:</p>
+          <ul>
+            <li><code>packages/core</code> — provider clients, tools, agent loop.</li>
+            <li><code>packages/desktop</code> — Electron app with native Windows UI.</li>
+            <li><code>packages/web</code> — this documentation site.</li>
+          </ul>
+
+          <h2 id="contributing">Contributing</h2>
+          <p>
+            CowxCode is MIT licensed. Fork it, open an issue, or send a pull
+            request. Keep the core dependency-free.
+          </p>
+        </main>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container foot-bottom">
+        <span>© 2026 CowxCode Team · MIT License</span>
+        <span class="disclaimer">
+          🍁 Proudly Canadian · Developed by <b style="color: var(--red-bright)">James Cowx</b> ·
+          <a href="https://www.JamesCowx.com" target="_blank" rel="noopener" style="color: var(--red-bright); text-decoration: none">www.JamesCowx.com</a><br />
+          Independent project. Not affiliated with the OpenCode team.
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      const links = document.querySelectorAll(".docs-nav a");
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              links.forEach((l) => l.classList.remove("active"));
+              const id = e.target.id;
+              const link = document.querySelector(`.docs-nav a[href="#${id}"]`);
+              link?.classList.add("active");
+            }
+          });
+        },
+        { rootMargin: "-20% 0px -70% 0px" }
+      );
+      document.querySelectorAll(".docs-content h2[id]").forEach((h) => obs.observe(h));
+    </script>
+  </body>
+</html>

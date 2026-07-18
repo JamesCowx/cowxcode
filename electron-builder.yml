@@ -1,0 +1,25 @@
+appId: com.cowxcode.app
+productName: CowxCode
+copyright: Copyright © 2026 CowxCode Team
+directories:
+  output: packages/desktop/dist
+  buildResources: packages/desktop/ui
+  app: packages/desktop
+files:
+  - main.js
+  - preload.js
+  - ui/**/*
+  - node_modules/@cowxcode/core/**/*
+win:
+  target:
+    - nsis
+    - portable
+  icon: packages/desktop/ui/icon.ico
+  publisherName: CowxCode Team
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  artifactName: CowxCode-Setup-${version}.${ext}
+portable:
+  artifactName: CowxCode-Portable-${version}.${ext}

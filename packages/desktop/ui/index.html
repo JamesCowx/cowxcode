@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CowxCode</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0a0b' stroke='%23e10600' stroke-width='2'/%3E%3Cpath d='M22 11 A7 7 0 1 0 22 23' fill='none' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Title bar -->
+      <div class="titlebar">
+        <div class="brand">
+          <span class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0a0a0b" stroke="#e10600" stroke-width="1.8"/><path d="M16.5 8.2 A5 5 0 1 0 16.5 17" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round"/></svg></span>
+          <span>CowxCode</span>
+        </div>
+        <div class="win-controls">
+          <button id="btn-min" title="Minimize">&#8211;</button>
+          <button id="btn-max" title="Maximize">&#9744;</button>
+          <button id="btn-close" class="close" title="Close">&#10005;</button>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="section-label">Workspace</div>
+        <div class="nav-item active" data-view="chat">
+          <span class="ic">&#9670;</span> Chat
+        </div>
+        <div class="nav-item" data-view="tools">
+          <span class="ic">&#9881;</span> Tools
+        </div>
+        <div class="nav-item" data-view="settings">
+          <span class="ic">&#9883;</span> Settings
+        </div>
+        <div class="nav-item" data-view="sessions">
+          <span class="ic">&#9776;</span> Sessions
+        </div>
+
+        <div class="folder-box">
+          <div class="label"><span>Project Folder</span><span class="change" id="change-folder">Change</span></div>
+          <div class="path" id="cwd-path">Loading...</div>
+        </div>
+
+        <div class="spacer"></div>
+        <div class="brand-footer">
+          <b>CowxCode</b> v2.0.0<br />
+          The open source coding agent.<br />
+          <span class="ca">&#127809; Proudly Canadian</span><br />
+          Developed by <b>James Cowx</b><br />
+          <a href="#" onclick="window.cowx.openExternal('https://www.JamesCowx.com')">www.JamesCowx.com</a>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <!-- Chat view -->
+        <section class="view active" id="view-chat">
+          <div class="chat-header">
+            <span class="mode-tag" id="mode-tag">build</span>
+            <div class="agent-tabs">
+              <button class="agent-tab active" id="agent-build">Build</button>
+              <button class="agent-tab" id="agent-plan">Plan</button>
+            </div>
+            <span class="title">Session</span>
+            <select id="model-select" class="model-select"></select>
+            <div class="actions">
+              <button class="btn" id="btn-save-session" title="Save session">&#128190;</button>
+              <button class="btn" id="btn-new">New Session</button>
+            </div>
+          </div>
+          <div class="messages" id="messages"></div>
+          <div class="composer">
+            <div class="box">
+              <textarea id="input" rows="1" placeholder="Ask CowxCode... (Tab to switch agent)"></textarea>
+              <button class="send" id="btn-send" title="Send">&#8594;</button>
+            </div>
+            <div class="hint">Enter to send · Shift+Enter for newline · Tab to switch agent (build/plan) · Save with &#128190;</div>
+          </div>
+        </section>
+
+        <!-- Tools view -->
+        <section class="view" id="view-tools">
+          <div class="chat-header"><span class="title">Available Tools</span></div>
+          <div class="tools-grid" id="tools-grid"></div>
+        </section>
+
+        <!-- Settings view -->
+        <section class="view" id="view-settings">
+          <div class="settings">
+            <h2>Provider Settings</h2>
+            <div class="desc">CowxCode is provider-agnostic. Point it at OpenAI, Anthropic, Google, Ollama, LM Studio or any OpenAI-compatible endpoint.</div>
+            <div class="field">
+              <label>Provider</label>
+              <select id="cfg-provider">
+                <option value="openai">OpenAI (compatible)</option>
+                <option value="opencode-go">OpenCode Go ($10/mo)</option>
+                <option value="opencode-zen">OpenCode Zen (PAYG)</option>
+                <option value="deepseek">DeepSeek</option>
+                <option value="anthropic">Anthropic</option>
+                <option value="google">Google Gemini</option>
+                <option value="mistral">Mistral</option>
+                <option value="groq">Groq</option>
+                <option value="xai">xAI Grok</option>
+                <option value="perplexity">Perplexity</option>
+                <option value="openrouter">OpenRouter</option>
+                <option value="ollama">Ollama</option>
+                <option value="lmstudio">LM Studio</option>
+              </select>
+            </div>
+            <div class="field"><label>Base URL</label><input id="cfg-baseurl" placeholder="https://api.openai.com/v1" /><div class="note">For Ollama use <code>http://localhost:11434/v1</code>. For Google Gemini, leave blank and enter API key.</div></div>
+            <div class="field"><label>API Key</label><input id="cfg-key" type="password" placeholder="sk-..." /><div class="note">Stored locally in your user data folder. Never sent anywhere but your provider.</div></div>
+            <div class="field"><label>Model</label><input id="cfg-model" placeholder="gpt-4o" /></div>
+            <div class="save-row">
+              <button class="btn primary" id="btn-save">Save Configuration</button>
+              <button class="btn" id="btn-reset-config">Reset Session</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sessions view -->
+        <section class="view" id="view-sessions">
+          <div class="chat-header"><span class="title">Sessions</span></div>
+          <div class="settings"><div class="desc">Click a session to load it. Sessions are stored in <code>~/.cowxcode/sessions/</code>.</div><div class="sessions-list"></div></div>
+        </section>
+      </main>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script src="renderer.js"></script>
+  </body>
+</html>

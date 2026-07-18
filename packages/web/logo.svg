@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="CowxCode logo">
+  <defs>
+    <linearGradient id="cx-red" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3b2f"/>
+      <stop offset="55%" stop-color="#e10600"/>
+      <stop offset="100%" stop-color="#8c0400"/>
+    </linearGradient>
+    <linearGradient id="cx-edge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6a5f"/>
+      <stop offset="100%" stop-color="#e10600"/>
+    </linearGradient>
+    <radialGradient id="cx-core" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#ff2a1f"/>
+      <stop offset="100%" stop-color="#0a0a0b"/>
+    </radialGradient>
+    <radialGradient id="cx-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e10600" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#e10600" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="cx-soft"><feGaussianBlur stdDeviation="2.2"/></filter>
+  </defs>
+
+  <!-- deep glow halo -->
+  <circle cx="60" cy="60" r="50" fill="url(#cx-glow)">
+    <animate attributeName="r" values="44;56;44" dur="3.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.45;1;0.45" dur="3.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- orbiting sparks -->
+  <g fill="#ff5a4f">
+    <circle cx="60" cy="10" r="2.4">
+      <animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="9s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="60" cy="10" r="1.8" fill="#ffd2cd">
+      <animateTransform attributeName="transform" type="rotate" from="180 60 60" to="540 60 60" dur="9s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- rotating dashed tech ring -->
+  <circle cx="60" cy="60" r="47" fill="none" stroke="#2a2a2e" stroke-width="1.5" stroke-dasharray="2 9">
+    <animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="26s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="60" cy="60" r="40" fill="none" stroke="url(#cx-edge)" stroke-width="2" stroke-dasharray="10 16" opacity="0.85">
+    <animateTransform attributeName="transform" type="rotate" from="360 60 60" to="0 60 60" dur="16s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- hex plate -->
+  <g>
+    <polygon points="60,18 96,39 96,81 60,102 24,81 24,39"
+             fill="url(#cx-core)" stroke="url(#cx-edge)" stroke-width="3" stroke-linejoin="round">
+      <animate attributeName="stroke-width" values="3;4.2;3" dur="2.8s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="60,18 96,39 96,81 60,102 24,81 24,39"
+             fill="none" stroke="#ff5a4f" stroke-width="1" opacity="0.45" filter="url(#cx-soft)"/>
+
+    <!-- the C, drawn with a dash sweep -->
+    <path d="M74 46 A20 20 0 1 0 74 80" fill="none" stroke="#ffffff" stroke-width="10"
+          stroke-linecap="round" stroke-dasharray="130" stroke-dashoffset="130">
+      <animate attributeName="stroke-dashoffset" values="130;0;0;130" keyTimes="0;0.45;0.9;1" dur="4s" repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>

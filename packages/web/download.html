@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download — CowxCode</title>
+    <meta name="description" content="Download CowxCode for Windows. Free and open source." />
+    <link rel="icon" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="container nav-inner">
+        <a class="brand" href="index.html"
+          ><span class="logo"><img src="logo.svg" alt="CowxCode" /></span> CowxCode</a
+        >
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="docs.html">Docs</a>
+          <a href="download.html">Download</a>
+        </div>
+        <a class="nav-cta" href="download.html">Get CowxCode</a>
+      </div>
+    </nav>
+
+    <section class="section">
+      <div class="container" style="max-width: 760px; text-align: center">
+        <h1 style="font-size: 46px; font-weight: 800; letter-spacing: -0.5px">
+          Get <span style="color: var(--red-bright); text-shadow: 0 0 30px var(--red-glow)">CowxCode</span>
+        </h1>
+        <p class="sub" style="margin: 14px auto 40px">
+          Free, open source, and built for Windows. Two ways to run it.
+        </p>
+
+        <div class="grid">
+          <div class="card dl-card reveal" style="text-align: left">
+            <div class="ic">▣</div>
+            <h3>Installer (recommended)</h3>
+            <p>
+              A standard Windows setup with Start Menu and uninstall support.
+              Best for daily use.
+            </p>
+            <a class="btn primary" href="#" style="display: inline-block; margin-top: 14px"
+              >Download .exe</a
+            >
+            <div style="color: var(--grey-text); font-size: 12px; margin-top: 8px">
+              CowxCode-Setup-1.0.0.exe · x64
+            </div>
+          </div>
+          <div class="card dl-card reveal" style="text-align: left">
+            <div class="ic">◈</div>
+            <h3>Portable</h3>
+            <p>
+              A single executable that runs from anywhere. No installation.
+              Great for USB drives.
+            </p>
+            <a class="btn ghost" href="#" style="display: inline-block; margin-top: 14px"
+              >Download .exe</a
+            >
+            <div style="color: var(--grey-text); font-size: 12px; margin-top: 8px">
+              CowxCode-Portable-1.0.0.exe · x64
+            </div>
+          </div>
+        </div>
+
+        <div class="dl-box reveal">
+          <h3 style="margin-bottom: 12px">Run from source</h3>
+          <pre><code>git clone https://github.com/your-org/cowxcode
+cd cowxcode
+npm install
+npm run build
+npm run start:desktop</code></pre>
+          <p style="color: var(--grey-text); font-size: 13.5px">
+            Requires <b style="color: var(--grey-text-bright)">Node.js 18+</b> and
+            Windows 10 or later.
+          </p>
+        </div>
+
+        <p style="color: var(--grey-text); font-size: 12.5px; margin-top: 30px; opacity: 0.7">
+          CowxCode is provided under the MIT license. Binaries are built with
+          Electron and electron-builder.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container foot-bottom">
+        <span>© 2026 CowxCode Team · MIT License</span>
+        <span class="disclaimer">
+          🍁 Proudly Canadian · Developed by <b style="color: var(--red-bright)">James Cowx</b> ·
+          <a href="https://www.JamesCowx.com" target="_blank" rel="noopener" style="color: var(--red-bright); text-decoration: none">www.JamesCowx.com</a><br />
+          Independent project. Not affiliated with the OpenCode team.
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll(".reveal, .dl-box").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

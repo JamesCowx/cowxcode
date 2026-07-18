@@ -1,0 +1,24 @@
+{
+  "name": "cowxcode",
+  "version": "1.0.0",
+  "description": "CowxCode - The open source coding agent with a black, grey & red soul.",
+  "private": true,
+  "license": "MIT",
+  "author": "CowxCode Team",
+  "workspaces": [
+    "packages/core",
+    "packages/desktop",
+    "packages/web"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "start:desktop": "npm run start --workspace packages/desktop",
+    "build:desktop": "npm run build --workspace packages/desktop",
+    "build:web": "npm run build --workspace packages/web",
+    "dev:web": "npm run dev --workspace packages/web"
+  },
+  "dependencies": {
+    "7zip-bin": "^5.2.0",
+    "app-builder-bin": "^4.2.0"
+  }
+}

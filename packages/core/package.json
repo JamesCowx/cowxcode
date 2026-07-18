@@ -1,0 +1,12 @@
+{
+  "name": "@cowxcode/core",
+  "version": "2.0.0",
+  "description": "CowxCode agent engine: provider-agnostic chat, tools and sessions.",
+  "type": "module",
+  "main": "index.js",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js"
+  },
+  "dependencies": {}
+}
