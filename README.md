@@ -37,5 +37,5 @@ npm run start:desktop
 
 MIT
 
-🍁 Proudly Canadian — Developed by James Cowx
+🍁 Proudly Canadian — Developed by [James Cowx](https://www.JamesCowx.com)
 
